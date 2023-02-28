@@ -1,0 +1,19 @@
+name: Publish website to Web Hosting
+on:
+  push:
+    branches:
+      - main
+jobs:
+  web-deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get latest code
+      uses: actions/checkout@v2
+
+    - name: Sync files
+      uses: SamKirkland/FTP-Deploy-Action@4.3.0
+      with:
+        server: ${{ secrets.LEARNPROJECT_01_FTP_SERVER }}
+        username: ${{ secrets.LEARNPROJECT_01_FTP_USERNAME }}
+        password: ${{ secrets.LEARNPROJECT_01_FTP_PASSWORD }}
